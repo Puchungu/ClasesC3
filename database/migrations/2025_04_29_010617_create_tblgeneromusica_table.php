@@ -11,9 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tblprofes', function (Blueprint $table) {
+        Schema::create('generomusica', function (Blueprint $table) {
             $table->id();
+            $table->integer('idgenero');
+            $table->integer('idcancion');
             $table->timestamps();
+
+            $table->foreign('idgenero')->references('id')->on('tblgeneros');
+            $table->foreign('idcancion')->references('id')->on('tblcanciones');
+            $table->unique(['idgenero','idcancion']);
+
         });
     }
 
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tblprofes');
+        Schema::dropIfExists('generomusica');
     }
 };
